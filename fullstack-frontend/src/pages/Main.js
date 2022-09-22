@@ -4,71 +4,43 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function Main() {
 
-    const[users,setUsers]=useState([]);
 
-    const {id}=useParams()
 
-    useEffect(() => {
-        loadUsers();
-      }, []);
-
-    const loadUsers = async () => {
-        const result = await axios.get("http://localhost:8080/users");
-        setUsers(result.data);
-    };
-
-    const deleteUser=async (id)=>{
-        await axios.delete(`http://localhost:8080/user/${id}`)
-        loadUsers()
-    }
-
-  return (
-    <div className='container'>
-        <div className='py-4'>
-            <table className="table border shadow">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">username</th>
-                
-                <th scope="col">Email</th>
-                <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    users.map((user,index)=>(
-                <tr>
-                    <th scope="row" key={index}>
-                        {index + 1}
-                    </th>
-                    <td>{user.name}</td>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>
-                        <Link 
-                            className='btn btn-primary mx-2'
-                            to={`/viewuser/${user.id}`}
-                        >
-                            View</Link>
-                        <Link 
-                            className="btn btn-outline-primary mx-2"
-                            to={`/edituser/${user.id}`}
-                        >
-                            Edit
-                        </Link>
-                        <button className="btn btn-danger mx-2"
-                        onClick={()=>deleteUser(user.id)}
-                        >Delete</button>
-                    </td>
-                </tr>
-                ))
-                }
-
-            </tbody>
-            </table>
+    return (
+        <div className='container'>
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="https://media.wired.jp/photos/61cebf50e533d60bb2d608b6/master/w_2560%2Cc_limit/342dc07fca26f593dfe3a4a39d7690be.jpg" class="d-block w-100"/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src="https://cdn.aitimes.kr/news/photo/202101/18889_20836_2527.jpg" class="d-block w-100"/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="http://www.irobotnews.com/news/photo/201704/10465_23692_19.png" class="d-block w-100"/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
-    </div>
-  )
+    )
 }
